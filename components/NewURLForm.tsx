@@ -41,7 +41,7 @@ export default function NewURLForm() {
                     return;
                 }
 
-                setShortUrl(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/${alias}`);
+                setShortUrl(`${window.location.origin}/${alias}`);
                 setMessage("Success!");
             }}
         >
