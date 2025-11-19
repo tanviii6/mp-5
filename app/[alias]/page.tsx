@@ -1,15 +1,15 @@
 import getCollection from "@/db";
+import getUrl from "@/lib/getUrl";
 import { redirect } from "next/navigation";
 
-export default async function AliasPage({ params }: { params: Promise<{ alias: string }> }) {
-  const { alias } = await params;
-    const links = await getCollection();
+export default async function AliasPage({ params, }: { params: Promise<{ alias: string }>; }) {
+    const { alias } = await params;
+    const url = await getUrl(alias);
 
-    const record = await links.findOne({ alias: alias });
-    if (!record) {
-        return <h1>Alias not found</h1>;
+    if (url) {
+        redirect(url);
     }
 
-    redirect(record.url);
+    redirect("/");
 }
 
