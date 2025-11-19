@@ -1,7 +1,7 @@
 "use server";
 
 import { UrlProps } from "@/components/UrlProps";
-import getCollection,{URL_COLLECTION}  from "@/db";
+import getCollection  from "@/db";
 import getAliasChecker from "./getAliasChecker";
 
 export default async function postAlias(alias: string, url: string): Promise<UrlProps | null>{
@@ -19,7 +19,7 @@ export default async function postAlias(alias: string, url: string): Promise<Url
     }
 
 
-    const links = await getCollection(URL_COLLECTION);
+    const links = await getCollection();
     const res = await links.insertOne({...p});
 
     if (!res.acknowledged) {
