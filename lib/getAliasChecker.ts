@@ -9,6 +9,4 @@ export default async function getAliasChecker(alias: string) : Promise<boolean> 
     }else{
         return false;
     }    
-
-
 }
