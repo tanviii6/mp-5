@@ -2,22 +2,14 @@
 
 import { UrlProps } from "@/components/UrlProps";
 import getCollection  from "@/db";
-import getAliasChecker from "./getAliasChecker";
 
 export default async function postAlias(alias: string, url: string): Promise<UrlProps | null>{
-      console.log("creating new alias");
+    console.log("creating new alias");
 
     const p = {
         alias: alias,
         url: url
     };
-
-    const isAvailable = await getAliasChecker(alias);
-    if (!isAvailable) {
-        console.log("Alias already exists!");
-        return null;
-    }
-
 
     const links = await getCollection();
     const res = await links.insertOne({...p});

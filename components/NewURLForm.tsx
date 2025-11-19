@@ -4,17 +4,24 @@ import getAliasChecker from "@/lib/getAliasChecker";
 import getUrlChecker from "@/lib/getUrlChecker";
 import postAlias from "@/lib/postAlias";
 import { Button, FormHelperText, TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function NewURLForm() {
     const [url, setUrl] = useState("");
     const [alias, setAlias] = useState("");
     const [message, setMessage] = useState("");
     const [shortUrl, setShortUrl] = useState("");
+    const [domain, setDomain] = useState("");
 
     function handleCopy() {
         navigator.clipboard.writeText(shortUrl);
     }
+
+    useEffect(() => {
+        setDomain(window.location.origin);
+    }, []);
+
+    
 
     return (
         <form
@@ -41,7 +48,7 @@ export default function NewURLForm() {
                     return;
                 }
 
-                setShortUrl(`${window.location.origin}/${alias}`);
+                setShortUrl(`${domain}/${alias}`);
                 setMessage("Success!");
             }}
         >
